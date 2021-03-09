@@ -1,0 +1,21 @@
+{
+  "name": "node-blog",
+  "version": "1.0.0",
+  "description": "Node Blog Application",
+  "main": "app.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.1",
+    "mongoose": "^5.11.19"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "boot": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
