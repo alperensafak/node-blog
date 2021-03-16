@@ -15,13 +15,22 @@ INSIDE HERO SECTION Section
             <div class="col-md-4 offset-md-4">
                 <div class="section-header">
                     <h2 class="title">lOGIN</h2>
+
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-12">
-                <form id="loginForm" action ="/users/login" method="POST">
+
+
+                {{#if sessionFlash.message}}
+                <div class="{{sessionFlash.type}}">
+                    {{sessionFlash.message}}
+                </div>
+                {{/if}}
+
+                <form id="loginForm" action="/users/login" method="POST">
                     <div class="row">
                         <div class="offset-2 col-md-8">
                             <div class="form-group">

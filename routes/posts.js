@@ -27,7 +27,12 @@ router.post("/test", (req, res) => {
     post_image: `/img/postimages/${post_image.name}`,
   });
 
-  res.redirect("/");
+  req.session.sessionFlash = {
+    type: "alert alert-success",
+    message: "Post succesful",
+  };
+
+  res.redirect("/blog");
 });
 
 module.exports = router;
