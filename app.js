@@ -8,6 +8,9 @@ const fileUpload = require("express-fileupload");
 const generateDate = require("./helpers/handlebars/generateDate").generateDate;
 const expressSession = require("express-session");
 const MongoStore = require("connect-mongo");
+const methodOverride = require('method-override')
+
+
 
 dotenv.config({ path: "./config/env/config.env" });
 
@@ -37,6 +40,9 @@ app.use((req, res, next) => {
 app.use(fileUpload());
 
 app.use(express.static("public"));
+
+app.use(methodOverride("_method"))
+
 
 app.engine(
   "handlebars",
@@ -73,11 +79,14 @@ app.use((req, res, next) => {
 const main = require("./routes/main");
 const posts = require("./routes/posts");
 const users = require("./routes/users");
+const admin = require("./routes/admin/index")
+
 const { Mongoose } = require("mongoose");
 const { networkInterfaces } = require("os");
 app.use("/", main);
 app.use("/posts", posts);
 app.use("/users", users);
+app.use("/admin", admin);
 
 app.listen(port, hostname, () =>
   console.log(`Example app listenin on http://${hostname}:${port}`)

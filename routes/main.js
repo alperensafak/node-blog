@@ -7,9 +7,10 @@ router.get("/", (req, res) => {
   res.render("site/index");
 });
 
-router.get("/about", (req, res) => {
-  res.render("site/about");
-});
+/* router.get("/admin", (req, res) => {
+  
+  res.render("admin/index");
+}); */
 
 router.get("/blog", (req, res) => {
   Post.find({})
