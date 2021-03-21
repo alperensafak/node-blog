@@ -2,20 +2,28 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
 const path = require("path");
+const Category = require("../models/Category");
+const User = require("../models/User");
 
 router.get("/new", (req, res) => {
-  if (req.session.userId) {
-    return res.render("site/addPost");
+  if (!req.session.userId) {
+    return res.redirect("users/login");
   }
-
-  res.redirect("/users/login");
+  Category.find({})
+    .lean()
+    .then(categories => {
+      res.render("site/addPost", { categories });
+    });
 });
 
 router.get("/:id", (req, res) => {
   Post.findById(req.params.id)
+    .populate({ path: "author", model: User })
     .lean()
     .then(post => {
-      res.render("site/post", { post });
+      Category.find({}).then(categories => {
+        res.render("site/post", { post, categories });
+      });
     });
 });
 
@@ -29,6 +37,7 @@ router.post("/test", (req, res) => {
   Post.create({
     ...req.body,
     post_image: `/img/postimages/${post_image.name}`,
+    author: req.session.userId,
   });
 
   req.session.sessionFlash = {
